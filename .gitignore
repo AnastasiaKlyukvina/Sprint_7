@@ -40,3 +40,6 @@ allure/
 allure-results/
 allure-report/
 .allure/
+.idea/
+allure/
+*.iml
