@@ -1,4 +1,13 @@
-package PACKAGE_NAME;
+    public class LoginRequest {
+        private final String login;
+        private final String password;
 
-public class LoginRequest {
-}
+        public LoginRequest(String login, String password) {
+            this.login = login;
+            this.password = password;
+        }
+
+        public String getLogin() { return login; }
+        public String getPassword() { return password; }
+    }
+

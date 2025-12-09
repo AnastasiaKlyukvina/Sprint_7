@@ -8,7 +8,7 @@ import static org.hamcrest.Matchers.*;
 
 public class CourierTest extends BaseTest {
 
-    private CourierApi courierApi = new CourierApi();
+    private final CourierApi courierApi = new CourierApi();
     private Courier testCourier;
     private String courierId;
 
@@ -90,5 +90,25 @@ public class CourierTest extends BaseTest {
         response.then()
                 .statusCode(400)
                 .body("message", equalTo("Недостаточно данных для входа"));
+    }
+
+    @Test
+    @Description("Проверка что для авторизации нужен логин")
+    public void loginWithoutLogin() {
+        Response response = courierApi.login("", "password123");
+        response.then()
+                .statusCode(400)
+                .body("message", equalTo("Недостаточно данных для входа"));
+    }
+
+    @Test
+    @Description("Проверка что логин обязателен для создания курьера")
+    public void createCourierWithoutLogin() {
+        Courier courier = new Courier("", "password123", "Иван");
+
+        Response response = courierApi.create(courier);
+        response.then()
+                .statusCode(400)
+                .body("message", equalTo("Недостаточно данных для создания учетной записи"));
     }
 }
